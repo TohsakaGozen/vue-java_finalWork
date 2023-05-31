@@ -1,5 +1,5 @@
 import axios from "axios"
-import { login_git, reqUserInfo } from "@/api"
+import { login_git, reqUserInfo, login, register } from "@/api"
 
 const state = {
     token: JSON.parse(localStorage.getItem('token')) || '',
@@ -17,6 +17,11 @@ const actions = {
         let result = await login_git(data)
         commit("GETTOKEN", result)
     },
+    async login({ commit }, data) {
+        let result = await login(data)
+        console.log(result)
+        commit("LOGIN", result)
+    },
     async getUserInfo({ commit, state }) {
         try {
             let result = await reqUserInfo(state.token)
@@ -24,6 +29,16 @@ const actions = {
             commit("GETUSERINFO", result)
         } catch (error) {
             console.log(error)
+        }
+
+    },
+    async register({ commit }, data) {
+        let result = await register(data)
+        console.log(result)
+        if (result.data == "此账号与密码已重复") {
+            return Promise.reject(new Error(result.data))
+        } else {
+            return Promise.resolve("注册成功")
         }
 
     },
@@ -40,6 +55,9 @@ const mutations = {
     },
     GETUSERINFO(state, result) {
         state.username = result.data.name
+    },
+    LOGIN(state, result) {
+        state.username = result.data.username
     },
     EXITLOGIN() {
         localStorage.removeItem('token')

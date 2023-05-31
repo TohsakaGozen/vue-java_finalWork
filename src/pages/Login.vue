@@ -51,19 +51,20 @@ export default {
     return {
       isRegister: false,
       loginInfo: {
-        username: "",
-        password: "",
+        username: "tohsaka",
+        password: "2005200318",
       },
       registInfo: {
-        username: "",
-        password: "",
-        phone: "",
+        username: "pansizhe",
+        password: "2005200320",
+        phone: "123456",
       },
     };
   },
   methods: {
     login() {
-      console.log(this.loginInfo);
+      this.$store.dispatch("user/login", this.loginInfo);
+      this.$router.push("home");
     },
     login_g() {
       window.location.href =
@@ -72,8 +73,17 @@ export default {
     register() {
       this.isRegister = !this.isRegister;
     },
-    submit() {
-      console.log(this.registInfo);
+    async submit() {
+      try {
+        let result = await this.$store.dispatch(
+          "user/register",
+          this.registInfo
+        );
+        alert(result);
+        this.isRegister = !this.isRegister;
+      } catch (error) {
+        alert(error);
+      }
     },
   },
 };
