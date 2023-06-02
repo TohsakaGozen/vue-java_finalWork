@@ -9,7 +9,7 @@
           </div>
         </li>
         <li v-for="(image, index) in todayList" :key="index" class="banner">
-          <img :src="image.path" />
+          <img :src="image.path" @click="goDetails(image)" />
         </li>
       </ul>
     </div>
@@ -20,7 +20,15 @@
 import { mapState } from "vuex";
 export default {
   name: "Today",
-  methods: {},
+  methods: {
+    goDetails(goodDetail) {
+      this.$router.push({
+        name: "details",
+        query: goodDetail,
+        params: goodDetail.moreImage,
+      });
+    },
+  },
   data() {
     return {
       todayList: {

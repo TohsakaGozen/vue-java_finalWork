@@ -13,8 +13,8 @@
       </div>
       <div class="middle"><h3>RPGSTORE</h3></div>
       <div class="right">
-        <router-link to="/"> 订单中心</router-link>|
-        <router-link to="/"> 购物车</router-link>|
+        <router-link to="/orderCenter"> 订单中心</router-link>|
+        <router-link to="/shopCar"> 购物车</router-link>|
         <router-link to="/"> 我的收藏</router-link>
         | <a href=""> 联系客服 </a>|
         <a href=""> 个人详情</a>

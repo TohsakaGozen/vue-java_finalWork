@@ -28,8 +28,8 @@ export default {
   name: "Like",
   data() {
     return {
-      likeList: {
-        likeList1: {
+      likeList: [
+        {
           image1: {
             path: "/images/like01.jpg",
             moreImage: {
@@ -100,7 +100,7 @@ export default {
             isStar: 0,
           },
         },
-        likeList2: {
+        {
           image7: {
             path: "/images/like09.jpg",
             produce: "【哔哩哔哩】GSC POP UP PARADE 哔哩哔哩 22&33娘 手办",
@@ -136,7 +136,7 @@ export default {
             price: "119",
           },
         },
-        likeList3: {
+        {
           image13: {
             path: "/images/like15.jpg",
             produce:
@@ -174,31 +174,19 @@ export default {
             price: "119",
           },
         },
-      },
+      ],
     };
   },
   methods: {
     goDetails(goodDetail) {
-      //   this.$router.push({
-      //     name: "details",
-      //     query: goodDetail,
-      //     params: goodDetail.moreImage,
-      //   });
+      this.$router.push({
+        name: "details",
+        query: goodDetail,
+        params: goodDetail.moreImage,
+      });
     },
     setNew() {
-      this.likeList = likeList;
-      //随机顺序展示
-      var likeList1 = Object.values(this.likeList.likeList1);
-      var length = likeList1.length,
-        randomIndex,
-        temp;
-      while (length) {
-        randomIndex = Math.floor(Math.random() * length--);
-        temp = likeList1[randomIndex];
-        likeList1[randomIndex] = likeList1[length];
-        likeList1[length] = temp;
-      }
-      state.likeList1 = likeList1;
+      this.likeList.reverse();
     },
   },
 };

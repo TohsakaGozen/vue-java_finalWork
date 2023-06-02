@@ -3,7 +3,7 @@ import { login_git, reqUserInfo, login, register } from "@/api"
 
 const state = {
     token: JSON.parse(localStorage.getItem('token')) || '',
-    username: ''
+    username: JSON.parse(localStorage.getItem('username')) || '',
 }
 const actions = {
     async getToken({ commit }, code) {
@@ -55,12 +55,15 @@ const mutations = {
     },
     GETUSERINFO(state, result) {
         state.username = result.data.name
+        localStorage.setItem('username', JSON.stringify(state.username))
     },
     LOGIN(state, result) {
         state.username = result.data.username
+        localStorage.setItem('username', JSON.stringify(state.username))
     },
     EXITLOGIN() {
         localStorage.removeItem('token')
+        localStorage.removeItem('username')
         state.token = ''
         state.username = ''
     }

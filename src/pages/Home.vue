@@ -1,6 +1,5 @@
 <template>
   <div class="content">
-    <Header />
     <Direction :Osize="Osize" :Isize="Isize" />
     <TodayGoods />
     <Like />
